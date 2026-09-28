@@ -1,0 +1,17 @@
+{
+  "slug": "gmm-vs-single-gaussian-multimodal-eval",
+  "title": "GMM vs Single-Gaussian Synthetic Generation on Bimodal Data",
+  "description": "Compares a 2-component GMM generator against a single-Gaussian baseline on 3D bimodal data, scoring KS fidelity, correlation MAE, and downstream KNN classification accuracy.",
+  "novelty": "Unlike the Gaussian copula project (mixed continuous/discrete features, copula framework, LR utility), this focuses purely on continuous multi-modal data where the central challenge is preserving mixture/bimodal structure rather than cross-feature dependency structure, and uses KNN classification as the utility task to directly measure whether cluster separability survives generation.",
+  "method": "Algorithm (2-component GMM): Fit GaussianMixture(n_components=2, covariance_type='full', random_state=seed) on the 70% stratified train split; sample n_train synthetic points via gmm.sample(n_train). Baseline (single Gaussian): Compute pooled mean (3,) and covariance (3,3) from the same train split; sample n_train points from scipy.stats.multivariate_normal(mean, cov). Validation: 70/30 stratified split on the binary component label (preserves ~50/50 balance in both splits; i.i.d. data so no temporal ordering). All fidelity metrics compare each synthetic set against the held-out real test set. Utility: train KNeighborsClassifier(n_neighbors=7) on synthetic features, predict labels on real test features. Metrics (direction): ks_pvalue_mean (higher=better, mean two-sample KS p-value across 3 features; high p-value means synthetic and real marginals are indistinguishable), corr_mae (lower=better, mean absolute error over 3 pairwise Pearson correlations), utility_knn_acc (higher=better, KNN classification accuracy on real test). The 2-component GMM preserves bimodality and per-component covariance structure; the single Gaussian collapses to one ellipsoid, losing both the mixture weights and the distinct per-cluster correlation patterns.",
+  "dependencies": [
+    "numpy",
+    "scipy",
+    "scikit-learn"
+  ],
+  "acceptance_tests": [
+    "GMM ks_pvalue_mean must be strictly greater than baseline ks_pvalue_mean, confirming the 2-component model preserves bimodal marginal structure better than a single Gaussian",
+    "GMM corr_mae must be strictly lower than baseline corr_mae, confirming the 2-component model captures per-cluster cross-feature correlations that the pooled single Gaussian smears out",
+    "GMM utility_knn_acc must exceed 0.85, confirming a classifier trained on GMM-generated data retains the cluster separability needed for accurate component identification on held-out real data"
+  ]
+}

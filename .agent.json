@@ -1,0 +1,10 @@
+{
+  "generator": "project-bundle-v2",
+  "status": "validated",
+  "date": "2026-09-28",
+  "slug": "gmm-vs-single-gaussian-multimodal-eval",
+  "description": "Compares a 2-component GMM generator against a single-Gaussian baseline on 3D bimodal data, scoring KS fidelity, correlation MAE, and downstream KNN classification accuracy.",
+  "method": "Algorithm (2-component GMM): Fit GaussianMixture(n_components=2, covariance_type='full', random_state=seed) on the 70% stratified train split; sample n_train synthetic points via gmm.sample(n_train). Baseline (single Gaussian): Compute pooled mean (3,) and covariance (3,3) from the same train split; sample n_train points from scipy.stats.multivariate_normal(mean, cov). Validation: 70/30 stratified split on the binary component label (preserves ~50/50 balance in both splits; i.i.d. data so no temporal ordering). All fidelity metrics compare each synthetic set against the held-out real test set. Utility: train KNeighborsClassifier(n_neighbors=7) on synthetic features, predict labels on real test features. Metrics (direction): ks_pvalue_mean (higher=better, mean two-sample KS p-value across 3 features; high p-value means synthetic and real marginals are indistinguishable), corr_mae (lower=better, mean absolute error over 3 pairwise Pearson correlations), utility_knn_acc (higher=better, KNN classification accuracy on real test). The 2-component GMM preserves bimodality and per-component covariance structure; the single Gaussian collapses to one ellipsoid, losing both the mixture weights and the distinct per-cluster correlation patterns.",
+  "category": "Synthetic data generation with distribution and utility evaluation",
+  "bundle_sha256": "689e78308f14d1e020ebca4c2acd6dea5984c4a0eb4f9fff28b0f02b3ad702d5"
+}

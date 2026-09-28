@@ -1,0 +1,14 @@
+{
+  "n_samples": 256,
+  "metrics": {
+    "ks_pvalue_mean": 0.5443025838512114,
+    "corr_mae": 0.03831665639309587,
+    "utility_knn_acc": 1.0
+  },
+  "baseline_metrics": {
+    "ks_pvalue_mean": 0.10887617136114125,
+    "corr_mae": 0.051283497848421844,
+    "utility_knn_acc": 1.0
+  },
+  "explanation": "70/30 stratified split on binary component label (i.i.d. data, no temporal ordering). GMM (2 components, full covariance) preserves bimodal marginal structure and per-cluster correlations; the single Gaussian baseline collapses to one ellipsoid. KS p-value mean (higher=better) and correlation MAE (lower=better) compare synthetic vs held-out real test marginals/correlations. KNN accuracy (higher=better) measures whether cluster separability survives generation."
+}

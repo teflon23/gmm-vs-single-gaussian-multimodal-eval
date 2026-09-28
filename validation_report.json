@@ -1,0 +1,21 @@
+{
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "status": "passed",
+  "python": "3.13.15",
+  "isolation": "separate_uid_seccomp_no_network_resource_limits_not_container",
+  "source_sha256": {
+    "main.py": "f7ffffb2b4c6a24fdfb43d6965c66cf26e3bbede1411fae2174bd33c81136d44",
+    "test_contract.py": "a01b4c343204cec27ce4a9d92bf2a030be1432f03279d697b4027a945d9b6540",
+    "requirements.txt": "d42e398defc40185470a89c9a94f705f68d90879f098cc260b3ee1e1405b4925",
+    ".gitignore": "95e5b9881836504ef66f4e94b5cec34cb1a72758153dc28844d1bbe167b32a0f",
+    "data.py": "a8601355ab028c173623a8b80c87ff34357ffab49ef15aaaa55dec4d4bc1b849",
+    "app.py": "4b64f890e2bcae0db6a81e9ad472cac65d3bb016ef2452c8509dcfae59b2df40",
+    "test_project.py": "d59fc6be9a84411d2331ab64c0114013ac32fea5b8c47a6fd04df5e6ba7f5e4f"
+  },
+  "test_output": ".............                                                            [100%]\n-------- generated xml file: /tmp/qwen-check-6nt4_mru/output/junit.xml ---------\n13 passed in 0.98s\n",
+  "demo_output": "{\n  \"n_samples\": 256,\n  \"metrics\": {\n    \"ks_pvalue_mean\": 0.5443025838512114,\n    \"corr_mae\": 0.03831665639309587,\n    \"utility_knn_acc\": 1.0\n  },\n  \"baseline_metrics\": {\n    \"ks_pvalue_mean\": 0.10887617136114125,\n    \"corr_mae\": 0.051283497848421844,\n    \"utility_knn_acc\": 1.0\n  },\n  \"explanation\": \"70/30 stratified split on binary component label (i.i.d. data, no temporal ordering). GMM (2 components, full covariance) preserves bimodal marginal structure and per-cluster correlations; the single Gaussian baseline collapses to one ellipsoid. KS p-value mean (higher=better) and correlation MAE (lower=better) compare synthetic vs held-out real test marginals/correlations. KNN accuracy (higher=better) measures whether cluster separability survives generation.\"\n}\n",
+  "seed": 42
+}
